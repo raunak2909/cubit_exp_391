@@ -1,12 +1,18 @@
 import 'package:cubit_exp_391/counter_cubit.dart';
 import 'package:cubit_exp_391/counter_state.dart';
+import 'package:cubit_exp_391/list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'list_page.dart';
+
 void main() {
   runApp(
-    BlocProvider(
-      create: (context) => CounterCubit(initialValue: 50),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => CounterCubit(),),
+        BlocProvider(create: (context) => ListCubit(),),
+      ],
       child: const MyApp(),
     ),
   );
@@ -23,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: MyHomePage(),
+      home: ListPage(),
     );
   }
 }
